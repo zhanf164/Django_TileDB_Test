@@ -7,6 +7,8 @@ def LoginPage(request):
     context = {'form': form, 'errors': None}
     if request.method == "POST":
         #here somebody is trying to login, so validate that the username is real
+        #I opt here to fetch the data from the request object itself, but in general, it would probably be best to fetch it
+        #from the form object
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         try:
