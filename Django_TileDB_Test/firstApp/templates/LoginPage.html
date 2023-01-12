@@ -1,0 +1,37 @@
+{%block head%}
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+{%endblock%}
+
+{%block body%}
+<body>
+    <div class="container">
+        <h1>Please enter in your credentials below</h1>
+        <form class="form" action=  {% url 'LoginPage' %} method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                {{form.username}}
+            </div>
+            <div class="container">
+                {{form.password}}
+            </div>
+            <input type='submit' value='Login'>
+        </form>
+        {%if errors != None%}
+            <div class="container">
+                {{errors}}
+            </div>
+        {%endif%}
+    </div>
+
+</body>
+
+{%endblock%}
