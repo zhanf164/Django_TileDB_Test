@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import User
 from .forms import UserForm
+import tiledb
+
+
 # Create your views here.
 def LoginPage(request):
     form = UserForm()
@@ -28,4 +31,6 @@ def LoginPage(request):
 
 def LandingPage(request):
     context = {}
+    if request.method == "POST":
+        pass
     return render(request, "LandingPage.html", context)
