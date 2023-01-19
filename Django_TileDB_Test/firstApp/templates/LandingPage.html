@@ -2,6 +2,61 @@
 
 {%block body%}
     <div class="container">
-        <h1>You have successfully logged in</h1>
+        <h1>Vairant Information</h1>
     </div>
+
+    <div class="container">
+        <h2>
+            Please input the variant information that you would like to fetch
+        </h2>
+
+        <form class="form" action=  {% url 'LandingPage' %} method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container" style="display:flex; flex-direction:row;justify-content:space-around">
+                <p>chromosome</p>
+                {{form.chrom}}
+            </div>
+            <div class="container" style="display:flex; flex-direction:row;justify-content:space-around">
+                <p>start</p>
+                {{form.start}}
+            </div>
+            
+            <div class="container" style="display:flex; flex-direction:row;justify-content:space-around">
+                <p>stop</p>
+                {{form.stop}}
+            </div>
+            <div class="container" style="margin: auto;">
+                <input type='submit' value='Search'>
+            </div>
+        </form>
+    </div>
+
+    {%if data != None%}
+        <div class="container">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <td>Sample Name</td>
+                        <td>Contig</td>
+                        <td>Pos Start</td>
+                        <td>Pos End</td>
+                        <td>Alleles</td>
+                        <td>fmt_GT</td>
+                    </tr>
+                </thead>
+                {%for i in data%}
+                    <tr>
+                        <td>{{i.sample_name}}</td>
+                        <td>{{i.contig}}</td>
+                        <td>{{i.pos_start}}</td>
+                        <td>{{i.pos_end}}</td>
+                        <td>{{i.alleles}}</td>
+                        <td>{{i.fmt_GT}}</td>
+                    </tr>
+
+                {%endfor%}
+            </table>
+        
+        </div>
+    {%endif%}
 {%endblock%}
